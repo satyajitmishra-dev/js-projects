@@ -1,0 +1,98 @@
+/* =================================
+   RESPONSIVE STYLES
+================================= */
+
+/* Large devices (992px and under) */
+@media (max-width: 992px) {
+    /* Projects Grid */
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
+    .footer-content {
+      gap: 20px;
+    }
+  }
+  
+  /* Medium devices (768px and under) */
+  @media (max-width: 768px) {
+    /* Layout */
+    .container {
+      flex-direction: column;
+    }
+    
+    .card, .right-card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    
+    /* Project Cards */
+    .projects-grid {
+      max-height: none;
+    }
+    
+    /* Typography */
+    .section-title {
+      font-size: 28px;
+    }
+    
+    .name {
+      font-size: 30px;
+    }
+    
+    .title {
+      font-size: 24px;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 40px 0 20px;
+      margin-top: 40px;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .footer-logo, .footer-links, .footer-contact {
+      width: 100%;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .footer-links h4::after, .footer-contact h4::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .footer-links ul li a:hover {
+      padding-left: 0;
+    }
+    
+    .footer-contact p {
+      justify-content: center;
+    }
+    
+    .footer-contact p:hover {
+      transform: none;
+    }
+    
+    .footer-social {
+      gap: 15px;
+    }
+    
+    .footer-social a {
+      width: 34px;
+      height: 34px;
+    }
+  }
+  
+  /* Small devices (480px and under) */
+  @media (max-width: 480px) {
+    /* Footer */
+    .footer-container {
+      padding: 0 20px;
+    }
+  }
