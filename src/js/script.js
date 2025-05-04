@@ -102,5 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateActiveNav();
   });
+
+  // Initialize active nav on page load
   updateActiveNav();
 });
+/******************************* Neon Cursor Trail *************************************** */
+
+//   const about = document.getElementById('about-me')
+// const requestUrl = "https://api.github.com/users/satyajitmishra-dev"
+//   fetch(requestUrl)
+//   .then((response) =>{
+//     return response.json();
+//   }).then(data =>{
+//     about.innerHTML = `</p>${data.bio}</p>`
+
+//   })
