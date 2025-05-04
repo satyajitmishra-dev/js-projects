@@ -1,0 +1,117 @@
+
+:root {
+  --spacing: 20px;
+  --primary-color: #3a86ff; 
+  --primary-dark: #2667cc;
+  --text-dark: #333;
+  --text-light: #fff;
+  --card-bg: #ffffff;
+  --body-bg-start: #2b2d42; 
+  --body-bg-end: #5c6784; 
+  --hover-transition: all 0.3s ease;
+  --project-card-bg: white;
+  --project-border: #f0f0f0;
+  --project-text: #666;
+  --subtitle-text: #666;
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #c0c0c0;
+  --scrollbar-thumb-hover: #a0a0a0;
+  --pronouns-text: #666;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --primary-color: #5e9eff;
+  --primary-dark: #4b8eff;
+  --text-dark: #f0f0f0;
+  --text-light: #fff;
+  --card-bg: #1e2235;
+  --body-bg-start: #121420;
+  --body-bg-end: #1e2235;
+  --project-card-bg: #2a2d42;
+  --project-border: #35384e;
+  --project-text: #b8b8b8;
+  --subtitle-text: #b8b8b8;
+  --scrollbar-track: #2a2d42;
+  --scrollbar-thumb: #454860;
+  --scrollbar-thumb-hover: #5a5f7d;
+  --pronouns-text: #b8b8b8;
+}
+
+/* Toggle Button Styles */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: var(--hover-transition);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Updated styles for dark mode compatibility */
+body {
+  background: linear-gradient(135deg, var(--body-bg-start), var(--body-bg-end));
+  color: var(--text-dark);
+}
+
+.card, .right-card {
+  background-color: var(--card-bg);
+  color: var(--text-dark);
+}
+
+.project-card {
+  background-color: var(--project-card-bg);
+  border: 1px solid var(--project-border);
+}
+
+.project-desc {
+  color: var(--project-text);
+}
+
+.project-title {
+  color: var(--text-dark);
+}
+
+.name {
+  color: var(--text-dark);
+}
+
+.section-title {
+  color: var(--text-dark);
+}
+
+.section-subtitle {
+  color: var(--subtitle-text);
+}
+
+.pronouns {
+  color: var(--pronouns-text);
+}
+
+.projects-grid::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+}
+
+.projects-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
