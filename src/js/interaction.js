@@ -112,3 +112,39 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+ /* About Me */
+// Function to animate skills when they come into view
+function animateSkillsOnScroll() {
+const skillsSection = document.querySelector('.skills-section');
+
+if (skillsSection) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Reset and restart animations when the skills section comes into view
+        const skillBars = document.querySelectorAll('.skill-progress');
+        skillBars.forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 100);
+        });
+        // Unobserve after animation has been triggered
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  observer.observe(skillsSection);
+}
+}
+
+// Add this function to your existing window.onload or DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', function() {
+// Your existing code
+
+// Add skills animation
+animateSkillsOnScroll();
+});

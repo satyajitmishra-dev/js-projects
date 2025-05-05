@@ -11,9 +11,10 @@ fetch("projectDetails.json")
   return response.json();
 })
 .then((data) => {  
-  title.innerText = `${data.projectTitle}`;
-  userName.innerText = `${data.developerName}`;
-  devRole.innerText = `${data.role}`;
+  title.innerText = `${data.projectTitle}`
+  userName.innerText = `${data.developerName}`
+  devRole.innerText = `${data.role}`
+  
 })
 .catch((error) => {
   title.innerText = "404 title not found"
@@ -129,17 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateActiveNav();
   });
 
-  // Initialize active nav on page load
   updateActiveNav();
 });
-/******************************* Neon Cursor Trail *************************************** */
 
-//   const about = document.getElementById('about-me')
-// const requestUrl = "https://api.github.com/users/satyajitmishra-dev"
-//   fetch(requestUrl)
-//   .then((response) =>{
-//     return response.json();
-//   }).then(data =>{
-//     about.innerHTML = `</p>${data.bio}</p>`
-
-//   })
