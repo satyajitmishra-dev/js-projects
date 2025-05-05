@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Satyajit Mishra | JS Beginner Projects</title>
+    <title></title>
     <link rel="stylesheet" href="src/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="src/css/darkMode.css">
@@ -49,10 +49,10 @@
           <div class="profile-img">
             <img src="src/img/profileLogo-min.png" alt="Satyajit Mishra" />
           </div>
-          <h1 class="name">Satyajit Mishra</h1>
+          <h1 class="name" id="userName"></h1>
           <p class="pronouns">(he/him)</p>
-          <h2 class="title">Front-End Developer</h2>
-          <button class="email-btn"> <i class="fa-solid fa-envelope"></i> CONNECT WITH ME </button>
+          <h2 class="title" id="dev-role"></h2>
+          <button class="email-btn"> <a href="https://forms.gle/jcFz9mib4PpGg3zQ8"><i class="fa-solid fa-envelope"></i></a> CONNECT WITH ME </button>
           <div class="social-icons">
             <a href="https://x.com/satyajitmishr0">
               <svg
@@ -109,7 +109,9 @@
               </svg>
             </a>
           </div>
-          <div class="about" id="about-me"></div>
+          <div class="about" id="about-me">
+            <!-- About Me Section -->
+          </div>
         </div>
 
         <!-- Right Card - Projects -->
@@ -180,14 +182,15 @@
             <!-- Project 5 -->
             <div class="project-card reveal delay-600">
               <div class="project-img">
-                <img src="src/img/default_download-min.png" alt="Project 5" />
+                <img src="src/img/weather-min.jpg" alt="Project 5" />
               </div>
               <div class="project-info">
-                <h3 class="project-title"></h3>
+                <h3 class="project-title">☁️ Weather App
+                </h3>
                 <p class="project-desc">
-                Coming Soon
+                  Developed a weather-checking web app using the OpenWeatherMap API. Users can enter a city name to fetch live temperature, humidity, and wind speed. This project is designed to help beginners learn how to work with APIs, handle async functions, fetch JSON data, and update the DOM based on user input
                 </p>
-                <a href="#" class="project-link">PREVIEW</a>
+                <a href="src/WeatherApp/weatherApp.html" class="project-link">PREVIEW</a>
               </div>
             </div>
 
