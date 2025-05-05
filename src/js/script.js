@@ -11,10 +11,9 @@ fetch("projectDetails.json")
   return response.json();
 })
 .then((data) => {  
-  title.innerText = `${data.projectTitle}`
-  userName.innerText = `${data.developerName}`
-  devRole.innerText = `${data.role}`
-  
+  title.innerText = `${data.projectTitle}`;
+  userName.innerText = `${data.developerName}`;
+  devRole.innerText = `${data.role}`;
 })
 .catch((error) => {
   title.innerText = "404 title not found"

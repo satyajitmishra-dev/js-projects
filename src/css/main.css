@@ -25,8 +25,11 @@ body {
   min-height: 100vh;
   padding: 20px;
   color: var(--text-dark);
-}
 
+}
+a{
+  text-decoration: none;
+}
 .container {
   display: flex;
   max-width: 1200px;
@@ -593,4 +596,87 @@ transition: var(--hover-transition);
 @keyframes heartbeat {  
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.1); }
+}
+/* Footer Form Styles */
+.footer-form {
+  flex: 1;
+  min-width: 280px;
+  margin-bottom: 20px;
+}
+
+.footer-form h4 {
+  font-size: 20px;
+  margin-bottom: 18px;
+  position: relative;
+  padding-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-light);
+}
+
+.footer-form h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 1.5px;
+  transition: width 0.3s ease;
+}
+
+.footer-form h4:hover::after {
+  width: 70px;
+}
+
+.footer .contact-form input,
+.footer .contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.footer .contact-form input:focus,
+.footer .contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.25);
+}
+
+.footer .contact-form input::placeholder,
+.footer .contact-form textarea::placeholder {
+  color: #aaa;
+}
+
+.footer .contact-form .submit-btn {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--hover-transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer .contact-form .submit-btn i {
+  margin-right: 8px;
+}
+
+.footer .contact-form .submit-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
