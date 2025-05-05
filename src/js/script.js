@@ -20,6 +20,10 @@ fetch("projectDetails.json")
   title.innerText = "404 title not found"
 });
 
+ 
+
+
+
 
 // Get the theme toggle button
 const themeToggle = document.getElementById("themeToggle");
