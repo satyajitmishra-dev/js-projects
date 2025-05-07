@@ -1,26 +1,25 @@
 // Add About 
-// const title = document.querySelector("title")
-// const userName = document.getElementById('userName')
-// const devRole = document.getElementById('dev-role')
-// const developerAbout = document.getElementById('developerAbout')
-// fetch("projectDetails.json") 
-// .then((response) => {
-//   if (!response.ok) {
-//     throw new Error("Network response was not ok");
-//   }
-//   return response.json();
-// })
-// .then((data) => {  
-//   title.innerText = `${data.projectTitle}`
-//   userName.innerText = `${data.developerName}`
-//   devRole.innerText = `${data.role}`
+const title = document.querySelector("title")
+const userName = document.getElementById('userName')
+const devRole = document.getElementById('dev-role')
+const developerAbout = document.getElementById('developerAbout')
+fetch("projectDetails.json") 
+.then((response) => {
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+})
+.then((data) => {  
+  title.innerText = `${data.projectTitle}`
+  userName.innerText = `${data.developerName}`
+  devRole.innerText = `${data.role}`
   
-// })
-// .catch((error) => {
-//   title.innerText = "404 title not found"
-// });
+})
+.catch((error) => {
+  title.innerText = "404 title not found"
+});
 
- 
 
 
 
@@ -130,6 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
     updateActiveNav();
   });
 
+  // Initialize active nav on page load
   updateActiveNav();
 });
+/******************************* Contact Form *************************************** */
 

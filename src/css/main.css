@@ -25,9 +25,8 @@ body {
   min-height: 100vh;
   padding: 20px;
   color: var(--text-dark);
-
 }
-a{
+a {
   text-decoration: none;
 }
 .container {
@@ -36,23 +35,21 @@ a{
   width: 100%;
   gap: var(--spacing);
 }
-.about{
+.about {
   background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   width: 100%;
-margin-top: 50px;
-transition: var(--hover-transition);
-
+  margin-top: 50px;
+  transition: var(--hover-transition);
 }
 
-/* Navigator */
 .main-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(43, 45, 66, 0.95); /* Matching the body-bg-start with opacity */
+  background-color: rgba(43, 45, 66, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   padding: 15px 0;
@@ -104,7 +101,7 @@ transition: var(--hover-transition);
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -115,11 +112,13 @@ transition: var(--hover-transition);
   transform: translateX(-50%);
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--primary-color);
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   width: 70%;
 }
 
@@ -137,13 +136,12 @@ transition: var(--hover-transition);
   transition: all 0.3s ease-in-out;
 }
 
-
 .page-wrapper {
   padding-top: 80px;
 }
 
-
-.card, .right-card {
+.card,
+.right-card {
   background-color: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -243,11 +241,11 @@ transition: var(--hover-transition);
 }
 
 .instagram:hover {
-  fill: #E4405F;
+  fill: #e4405f;
 }
 
 .github:hover {
-  fill: #181717; 
+  fill: #181717;
 }
 
 .section-title {
@@ -287,7 +285,7 @@ transition: var(--hover-transition);
   padding-right: 10px; /* Space for scrollbar */
 }
 
-/* Custom scrollbar */
+
 .projects-grid::-webkit-scrollbar {
   width: 8px;
 }
@@ -339,7 +337,7 @@ transition: var(--hover-transition);
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.05));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
 }
 
 .project-img img {
@@ -446,7 +444,8 @@ transition: var(--hover-transition);
   margin-bottom: 20px;
 }
 
-.footer-links h4, .footer-contact h4 {
+.footer-links h4,
+.footer-contact h4 {
   font-size: 20px;
   margin-bottom: 18px;
   position: relative;
@@ -455,7 +454,8 @@ transition: var(--hover-transition);
   letter-spacing: 0.5px;
 }
 
-.footer-links h4::after, .footer-contact h4::after {
+.footer-links h4::after,
+.footer-contact h4::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -467,7 +467,8 @@ transition: var(--hover-transition);
   transition: width 0.3s ease;
 }
 
-.footer-links h4:hover::after, .footer-contact h4:hover::after {
+.footer-links h4:hover::after,
+.footer-contact h4:hover::after {
   width: 70px;
 }
 
@@ -593,9 +594,14 @@ transition: var(--hover-transition);
   animation: heartbeat 1.5s infinite;
 }
 
-@keyframes heartbeat {  
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 /* Footer Form Styles */
 .footer-form {
