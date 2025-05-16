@@ -99,7 +99,7 @@ function initializePage() {
   setInterval(updateDateTime, 60000);
 
   // ================== Daily Quote ==================
-  fetch('http://api.quotable.io/random')
+  fetch('https://api.quotable.io/random')
     .then(res => res.json())
     .then(data => document.getElementById('daily-quote').textContent = data.content)
     .catch(err => {
@@ -108,7 +108,7 @@ function initializePage() {
     });
 
   // ================== Weather ==================
-  // Function to get user's geolocation
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(fetchWeather, showError);
   } else {
@@ -259,7 +259,7 @@ window.addEventListener("load", () => {
     input.value = text;
 
     const delBtn = document.createElement('button');
-    delBtn.textContent = "❌";
+    delBtn.innerHTML = `<i class="fa-solid fa-trash" style="color:rgba(247, 2, 2, 0.54);"></i>`;
     delBtn.style.marginLeft = '8px';
     delBtn.style.background = 'none';
     delBtn.style.border = 'none';
@@ -278,7 +278,6 @@ window.addEventListener("load", () => {
     div.appendChild(delBtn);
     taskContainer.appendChild(div);
   }
-
   // ================== Quick Apps ==================
   document.querySelectorAll('.app-btn').forEach(btn => {
     btn.addEventListener('click', function() {
