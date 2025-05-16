@@ -132,5 +132,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize active nav on page load
   updateActiveNav();
 });
-/******************************* Contact Form *************************************** */
+
 
