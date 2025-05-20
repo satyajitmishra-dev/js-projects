@@ -99,7 +99,7 @@ function initializePage() {
   setInterval(updateDateTime, 60000);
 
   // ================== Daily Quote ==================
-  fetch('https://api.quotable.io/random')
+  fetch('http://api.quotable.io/random')
     .then(res => res.json())
     .then(data => document.getElementById('daily-quote').textContent = data.content)
     .catch(err => {
