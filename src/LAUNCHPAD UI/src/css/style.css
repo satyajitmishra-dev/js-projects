@@ -169,7 +169,12 @@ body {
   border-radius: 50%;
   transition: transform 0.3s;
 }
-
+.battery{
+  position: fixed;
+  bottom: 0.27rem;
+  color: orange;
+  
+}
 .card:hover .indicator {
   transform: scale(1.2);
 }
@@ -218,7 +223,7 @@ body {
 }
 
 .time {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 500;
   color: var(--text-dark);
   transition: transform 0.3s;
@@ -249,7 +254,6 @@ body {
 .card:hover .temp {
   transform: scale(1.05);
 }
-
 .city {
   font-size: 14px;
   color: var(--text-gray);
@@ -423,7 +427,7 @@ body {
 }
 
 .github .app-icon {
-  color: #2D3142;
+  color: #333333;
 }
 .twitter .app-icon {
   color: #1DA1F2;

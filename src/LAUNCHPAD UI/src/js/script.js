@@ -97,6 +97,46 @@ function initializePage() {
   }
   updateDateTime();
   setInterval(updateDateTime, 60000);
+  
+  // ================== Battery ==================
+
+   navigator.getBattery().then(function(battery) {
+    function updateBatteryIcon() {
+      let level = battery.level;
+      let percentage = Math.round(level * 100);
+      let charging = battery.charging;
+      let iconClass = "";
+
+      if (charging && percentage === 100) {
+        iconClass = "fa-battery-full"; // Charging Full
+      } else if (charging) {
+        iconClass = "fa-battery-charging";
+      } else if (percentage >= 80) {
+        iconClass = "fa-battery-full";
+      } else if (percentage >= 60) {
+        iconClass = "fa-battery-three-quarters";
+      } else if (percentage >= 40) {
+        iconClass = "fa-battery-half";
+      } else if (percentage >= 20) {
+        iconClass = "fa-battery-quarter";
+      } else {
+        iconClass = "fa-battery-empty";
+      }
+
+      batterySection.innerHTML = `<i class="fa-solid ${iconClass}"></i> ${percentage}%`;
+    }
+
+  
+    updateBatteryIcon();
+
+   
+    battery.addEventListener('levelchange', updateBatteryIcon);
+
+    battery.addEventListener('chargingchange', function() {
+      console.log("Charging Status Changed:", battery.charging ? "Charging" : "Not Charging");
+      updateBatteryIcon();
+    });
+  });
 
   // ================== Daily Quote ==================
   fetch('http://api.quotable.io/random')
