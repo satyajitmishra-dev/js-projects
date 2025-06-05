@@ -1,3 +1,29 @@
+// Add About 
+const title = document.querySelector("title")
+const userName = document.getElementById('userName')
+const devRole = document.getElementById('dev-role')
+const developerAbout = document.getElementById('developerAbout')
+fetch("projectDetails.json") 
+.then((response) => {
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+})
+.then((data) => {  
+  title.innerText = `${data.projectTitle}`
+  userName.innerText = `${data.developerName}`
+  devRole.innerText = `${data.role}`
+  
+})
+.catch((error) => {
+  title.innerText = "404 title not found"
+});
+
+
+
+
+
 // Get the theme toggle button
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = themeToggle.querySelector("i");
@@ -29,6 +55,37 @@ themeToggle.addEventListener("click", function () {
     themeIcon.classList.add("fa-sun");
   }
 });
+
+/******************************* Naviagtor *************************************** */
+
+    const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all skill cards
+        document.querySelectorAll('.skill-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add hover sound effect (optional)
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
 
 /******************************* Naviagtor *************************************** */
 
@@ -106,5 +163,5 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize active nav on page load
   updateActiveNav();
 });
-
+/******************************* Contact Form *************************************** */
 
