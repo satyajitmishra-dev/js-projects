@@ -104,7 +104,7 @@ function initializePage() {
     .then(data => document.getElementById('daily-quote').textContent = data.content)
     .catch(err => {
       console.error(err);
-      document.getElementById('daily-quote').textContent = "⚠️ Error loading quote";
+      document.getElementById('daily-quote').textContent = "Learning never exhausts the mind";
     });
 
   // ================== Weather ==================
@@ -207,7 +207,7 @@ function capitalize(str) {
     .join(' ');
 }
 
-// Optional: Auto-detect location on page load
+//Auto-detect location on page load
 window.addEventListener("load", () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -283,12 +283,12 @@ window.addEventListener("load", () => {
     btn.addEventListener('click', function() {
       const app = this.className.split(' ')[1];
       const links = {
-        instagram: 'https://instagram.com/satyajit_mishra1',
+        instagram: 'https://instagram.com',
         youtube: 'https://youtube.com',
-        github: 'https://github.com/satyajitmishra-dev',
-        linkedin: 'https://linkedin.com/satyajitmishra1',
-        twitter: 'https://x.com/satyajit-mishr0',
-        whatsapp: 'https://whatsapp.com',
+        github: 'https://github.com',
+        linkedin: 'https://linkedin.com/in/',
+        twitter: 'https://x.com',
+        whatsapp: 'https://web.whatsapp.com',
         stackoverflow: 'https://stackoverflow.com/',
         codepen: 'https://codepen.com/'
       };
