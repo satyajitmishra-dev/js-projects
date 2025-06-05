@@ -7,7 +7,7 @@ This repository showcases beginner-friendly projects I’ve created while learni
 ![Screenshot (19)](https://github.com/user-attachments/assets/1c267a56-7399-4368-b1b2-149eb75d4b36)
 ![Screenshot (20)](https://github.com/user-attachments/assets/569ffec6-54e1-4769-891d-cdc2f7117a1b)
 
-[👉👉 > [Project Demo](https://satyajitmishraportfolio.on.drv.tw/www.satyajitmishra.com/)] 
+[👉👉 > [Project Demo](https://satyajitportfolio-tawny.vercel.app/)] 
 
 ### 1. 🌤️ Weather App
 Fetches and displays real-time weather data using the OpenWeatherMap API.  
