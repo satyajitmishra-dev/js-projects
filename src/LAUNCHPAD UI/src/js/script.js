@@ -329,6 +329,8 @@ window.addEventListener("load", () => {
         linkedin: 'https://linkedin.com/in/',
         twitter: 'https://x.com',
         whatsapp: 'https://web.whatsapp.com',
+        facebook: 'https://facebook.com',
+        leetcode: 'https://leetcode.com',
         stackoverflow: 'https://stackoverflow.com/',
         codepen: 'https://codepen.com/'
       };
