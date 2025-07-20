@@ -466,20 +466,15 @@
       <!-- New Contact Form Section -->
       <div class="footer-form reveal delay-300">
         <h4>Get In Touch</h4>
-        <form class="contact-form">
-          <div class="form-group">
-            <input type="text" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="Your Email" required>
-          </div>
-          <div class="form-group">
-            <textarea placeholder="Your Message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">
-            <i class="fas fa-paper-plane"></i> Send Message
-          </button>
-        </form>
+        <form id="contactForm" action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Send Message
+    </button>
+</form>
+<p id="form-status"></p>
       </div>
       
     </div>
