@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*=========================================================================
 ====================== Dark Theme Styles ==================================
 ============================================================================*/
@@ -32,4 +33,40 @@
 
 .dark-theme #news-list li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+=======
+/*=========================================================================
+====================== Dark Theme Styles ==================================
+============================================================================*/
+
+.dark-theme .app-btn {
+  background-color: #2d2d2d;
+}
+
+.dark-theme .app-btn:hover {
+  background-color: #3d3d3d;
+}
+
+.dark-theme .gallery-item {
+  background-color: #2d2d2d;
+}
+
+.dark-theme .gallery-item:hover {
+  background-color: #3d3d3d;
+}
+
+.dark-theme .task-input {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark-theme .profile-icon {
+  background-color: #2d2d2d;
+}
+
+.dark-theme .profile-icon:hover {
+  background-color: #3d3d3d;
+}
+
+.dark-theme #news-list li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+>>>>>>> 1fd66db2d5d128e12c763de3b8422e1de4ec28eb
 }

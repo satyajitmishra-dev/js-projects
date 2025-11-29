@@ -277,6 +277,7 @@ a {
   margin-bottom: 30px;
   align-self: flex-start;
 }
+<<<<<<< HEAD
 .project-filters {
     display: flex;
     justify-content: center;
@@ -299,6 +300,9 @@ a {
     background: var(--primary-color);
     color: white;
 }
+=======
+
+>>>>>>> 1fd66db2d5d128e12c763de3b8422e1de4ec28eb
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
