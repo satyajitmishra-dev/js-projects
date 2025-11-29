@@ -2,26 +2,333 @@
 ====================== Responsive Styles ==================================
 ============================================================================*/
 
-/* Medium screens */
-@media (max-width: 992px) {
+/* Large Desktop (1400px+) */
+@media (min-width: 1400px) {
   .container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  body {
+    padding: 50px 40px;
   }
 }
 
-/* Small screens */
+/* Desktop (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Laptop (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    height: 260px;
+  }
+}
+
+/* Tablet (768px - 991px) */
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    height: 260px;
+    padding: 24px;
+  }
+
+  .search-container {
+    padding: 14px 24px;
+  }
+
+  .time {
+    font-size: 46px;
+  }
+
+  .temp {
+    font-size: 42px;
+  }
+
+  /* Settings panel */
+  .settings-panel {
+    width: 300px;
+  }
+
+  .settings-panel.active {
+    right: 10px;
+  }
+}
+
+/* Mobile Landscape (576px - 767px) */
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
   }
-  
+
+  .card {
+    height: auto;
+    min-height: 220px;
+    padding: 20px;
+  }
+
+  body {
+    padding: 20px 16px;
+  }
+
+  /* Search container */
   .search-container {
     flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px;
   }
-  
-  .search-input {
+
+  .search-icon {
     order: 1;
+  }
+
+  .search-input {
+    order: 2;
     width: 100%;
-    margin: 10px 0;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .search-btn,
+  .voice-btn,
+  .dark-mode-toggle,
+  .settings-toggle,
+  .profile-icon {
+    order: 3;
+    width: 40px;
+    height: 40px;
+    margin-left: 8px;
+  }
+
+  /* Typography adjustments */
+  .time {
+    font-size: 40px;
+  }
+
+  .temp {
+    font-size: 38px;
+  }
+
+  .card-title {
+    font-size: 12px;
+  }
+
+  /* Pomodoro */
+  .pomodoro-display {
+    width: 100px;
+    height: 100px;
+  }
+
+  .pomodoro-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .pomodoro-time {
+    font-size: 20px;
+  }
+
+  .pomodoro-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Settings panel */
+  .settings-panel {
+    width: 280px;
+    padding: 20px;
+  }
+
+  .settings-panel.active {
+    right: 0;
+    border-radius: 24px 0 0 24px;
+  }
+
+  /* Quick apps grid */
+  .quick-apps {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+  }
+
+  .app-btn {
+    padding: 14px 6px;
+    font-size: 11px;
+  }
+
+  .app-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+  }
+}
+
+/* Mobile Portrait (up to 575px) */
+@media (max-width: 575px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  .search-container {
+    padding: 10px 12px;
+  }
+
+  .card {
+    padding: 18px;
+    min-height: 200px;
+  }
+
+  .time {
+    font-size: 36px;
+  }
+
+  .temp {
+    font-size: 34px;
+  }
+
+  .quote {
+    font-size: 15px;
+  }
+
+  /* Pomodoro */
+  .pomodoro-display {
+    width: 90px;
+    height: 90px;
+  }
+
+  .pomodoro-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .pomodoro-time {
+    font-size: 18px;
+  }
+
+  .pomodoro-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .pomodoro-controls {
+    gap: 10px;
+  }
+
+  /* Settings panel full width on small mobile */
+  .settings-panel {
+    width: 100%;
+    right: -100%;
+    border-radius: 0;
+  }
+
+  .settings-panel.active {
+    right: 0;
+  }
+
+  /* Quick apps */
+  .quick-apps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Weather details stack */
+  .weather-details {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .weather-detail-item {
+    justify-content: flex-start;
+  }
+
+  /* Buttons */
+  .search-btn,
+  .voice-btn,
+  .dark-mode-toggle,
+  .settings-toggle,
+  .profile-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    margin-left: 6px;
+  }
+}
+
+/* Extra Small Mobile (up to 375px) */
+@media (max-width: 375px) {
+  .time {
+    font-size: 32px;
+  }
+
+  .temp {
+    font-size: 30px;
+  }
+
+  .card-title {
+    font-size: 11px;
+  }
+
+  .quick-apps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pomodoro-display {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pomodoro-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .pomodoro-time {
+    font-size: 16px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .card {
+    height: auto;
+    min-height: 180px;
+  }
+
+  .loader-container {
+    padding: 20px;
+  }
+
+  body {
+    padding: 20px;
+  }
+}
+
+/* Print styles */
+@media print {
+
+  .search-container,
+  .settings-panel,
+  .loader-container {
+    display: none;
+  }
+
+  .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body {
+    background: white;
   }
 }
