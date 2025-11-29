@@ -2,14 +2,11 @@
 ====================== Main javascript ==================================
 ============================================================================*/
 
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  setTimeout(function() {
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(function () {
     document.getElementById('loader').classList.add('fade-out');
     document.getElementById('content').style.opacity = '1';
   }, 1500);
-
 
   initializePage();
 });
@@ -23,10 +20,8 @@ function initializePage() {
     document.documentElement.classList.toggle('dark-theme', state);
     moonIcon.classList.toggle('fa-moon', !state);
     moonIcon.classList.toggle('fa-sun', state);
-    darkModeToggle.style.backgroundColor = state ? '#4285f4' : '';
   }
 
-  // Initialize dark mode state
   const savedMode = localStorage.getItem('darkMode') === 'true';
   applyDarkMode(savedMode);
 
@@ -66,7 +61,6 @@ function initializePage() {
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       searchInput.value = transcript;
-      // Optional: Auto search
       document.getElementById("search-button").click();
       voiceBtn.classList.remove('voice-pulse');
     };
@@ -80,7 +74,7 @@ function initializePage() {
       voiceBtn.classList.remove('voice-pulse');
     };
   } else {
-    voiceBtn.style.display = "none"; // Hide if unsupported
+    voiceBtn.style.display = "none";
   }
 
   // ================== Time & Date ==================
@@ -108,7 +102,6 @@ function initializePage() {
     });
 
   // ================== Weather ==================
-
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(fetchWeather, showError);
   } else {
@@ -128,113 +121,90 @@ function initializePage() {
     document.getElementById('weather-temp').textContent = '--°C';
   }
 
-  // Function to fetch weather data using OpenWeatherMap API
- async function fetchWeatherData(lat, lon) {
-  const apiKey = "58150b5e6a10b632504148292ede9f48";
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  async function fetchWeatherData(lat, lon) {
+    const apiKey = "58150b5e6a10b632504148292ede9f48";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
-  // Set loading state
-  setText("weather-city", "Loading...");
-  setText("weather-temp", "--°C");
-  setText("weather-description", "");
-
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    if (!data || !data.main || !data.weather || !data.weather[0]) {
-      throw new Error("Incomplete weather data");
-    }
-
-    updateWeatherUI(data);
-  } catch (error) {
-    console.error("Error fetching weather data:", error);
-    setText("weather-city", "Weather unavailable");
+    setText("weather-city", "Loading...");
     setText("weather-temp", "--°C");
-    setText("weather-description", "N/A");
+    setText("weather-description", "");
+
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (!data || !data.main || !data.weather || !data.weather[0]) {
+        throw new Error("Incomplete weather data");
+      }
+
+      updateWeatherUI(data);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      setText("weather-city", "Weather unavailable");
+      setText("weather-temp", "--°C");
+      setText("weather-description", "N/A");
+
+      const weatherIconElem = document.getElementById("weather-icon");
+      if (weatherIconElem) {
+        weatherIconElem.innerHTML = `<i class="fas fa-exclamation-triangle"></i>`;
+      }
+    }
+  }
+
+  function updateWeatherUI(data) {
+    const city = data.name;
+    const temp = Math.floor(data.main.temp);
+    const feelsLike = Math.floor(data.main.feels_like);
+    const humidity = data.main.humidity;
+    const weather = capitalize(data.weather[0].description);
+    const icon = data.weather[0].icon;
+
+    setText("weather-city", city);
+    setText("weather-temp", `${temp}°C`);
+    setText("weather-description", weather);
+    setText("feels-like", `${feelsLike}°C`);
+    setText("humidity", `${humidity}%`);
 
     const weatherIconElem = document.getElementById("weather-icon");
+    const iconMap = {
+      '01': 'fa-sun',
+      '02': 'fa-cloud-sun',
+      '03': 'fa-cloud',
+      '04': 'fa-cloud',
+      '09': 'fa-cloud-showers-heavy',
+      '10': 'fa-cloud-rain',
+      '11': 'fa-bolt',
+      '13': 'fa-snowflake',
+      '50': 'fa-smog'
+    };
+
+    const iconCode = icon.slice(0, 2);
+    const iconClass = iconMap[iconCode] || 'fa-cloud';
+
     if (weatherIconElem) {
-      weatherIconElem.innerHTML = `<i class="fas fa-exclamation-triangle"></i>`;
+      weatherIconElem.innerHTML = `<i class="fas ${iconClass}"></i>`;
     }
   }
-}
 
-function updateWeatherUI(data) {
-  const city = data.name;
-  const temp = Math.floor(data.main.temp);
-  const weather = capitalize(data.weather[0].description);
-  const icon = data.weather[0].icon;
-
-  setText("weather-city", city);
-  setText("weather-temp", `${temp}°C`);
-  setText("weather-description", weather);
-
-  const weatherIconElem = document.getElementById("weather-icon");
-
-  const iconMap = {
-    '01': 'fa-sun',                  // clear sky
-    '02': 'fa-cloud-sun',           // few clouds
-    '03': 'fa-cloud',               // scattered clouds
-    '04': 'fa-cloud',               // broken clouds
-    '09': 'fa-cloud-showers-heavy', // shower rain
-    '10': 'fa-cloud-rain',          // rain
-    '11': 'fa-bolt',                // thunderstorm
-    '13': 'fa-snowflake',           // snow
-    '50': 'fa-smog'                 // mist
-  };
-
-  const iconCode = icon.slice(0, 2); // get first two digits
-  const iconClass = iconMap[iconCode] || 'fa-cloud'; // fallback
-
-  if (weatherIconElem) {
-    weatherIconElem.innerHTML = `<i class="fas ${iconClass}"></i>`;
+  function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = text;
+    }
   }
-}
 
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.textContent = text;
+  function capitalize(str) {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
-}
-
-// Helper function to capitalize weather descriptions
-function capitalize(str) {
-  return str
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
-// Optional: Auto-detect location on page load
-window.addEventListener("load", () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        fetchWeatherData(latitude, longitude);
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        setText("weather-city", "Location blocked");
-      }
-    );
-  } else {
-    console.warn("Geolocation not supported");
-    setText("weather-city", "Geolocation unsupported");
-  }
-});
 
   // ================== Reminders - Task Input ==================
   const mainTaskInput = document.getElementById('main-task-input');
   const taskContainer = document.querySelector('.task-container');
 
-  // Load saved tasks
   const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
   savedTasks.forEach(task => createTask(task));
 
-  mainTaskInput.addEventListener('keypress', function(e) {
+  mainTaskInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter' && this.value.trim()) {
       const value = this.value.trim();
       createTask(value);
@@ -278,9 +248,10 @@ window.addEventListener("load", () => {
     div.appendChild(delBtn);
     taskContainer.appendChild(div);
   }
+
   // ================== Quick Apps ==================
   document.querySelectorAll('.app-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const app = this.className.split(' ')[1];
       const links = {
         instagram: 'https://instagram.com/satyajit_mishra1',
@@ -333,25 +304,21 @@ window.addEventListener("load", () => {
 
   if (isDesktop && typeof Sortable !== 'undefined') {
     const container = document.getElementById('card-container');
-    
- 
+
     const sortable = new Sortable(container, {
       animation: 200,
       ghostClass: 'sortable-ghost',
       onEnd: function (evt) {
-
         const cardOrder = Array.from(container.children).map(card => card.id);
-   
         localStorage.setItem('cardOrder', JSON.stringify(cardOrder));
       }
     });
-
 
     const storedOrder = JSON.parse(localStorage.getItem('cardOrder'));
     if (storedOrder) {
       storedOrder.forEach(cardId => {
         const card = document.getElementById(cardId);
-        if (card) container.appendChild(card); // Reorder the cards based on the stored order
+        if (card) container.appendChild(card);
       });
     }
   }

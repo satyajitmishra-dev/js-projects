@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> LaunchPad UI || by Satyajit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="src/css/style.css">
@@ -11,22 +12,25 @@
   <link rel="stylesheet" href="src/css/darkTheme.css">
   <link rel="icon" type="image/png" href="src/favicon.ico">
 </head>
+
 <body>
- 
- <div class="loader-container" id="loader">
+
+  <div class="loader-container" id="loader">
     <div class="loader"></div>
   </div>
 
   <div class="content" id="content">
     <div class="search-container">
       <i class="fa-brands fa-google search-icon fa-fade"></i>
-      <input type="text" class="search-input" id="google-search" placeholder="Search in Google" aria-label="Google Search">
+      <input type="text" class="search-input" id="google-search" placeholder="Search in Google"
+        aria-label="Google Search">
       <button class="search-btn" id="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
       <button class="voice-btn" id="voice-btn" aria-label="Voice Search"><i class="fas fa-microphone"></i></button>
-      <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+      <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode"><i
+          class="fas fa-moon"></i></button>
       <div class="profile-icon" title="Profile"><i class="fas fa-user"></i></div>
     </div>
-    
+
     <div class="container" id="card-container">
       <!-- Time Card -->
       <div class="card" id="card1">
@@ -35,7 +39,7 @@
         <div class="time" id="current-time">--:--</div>
         <div class="date" id="current-date">--/--/----</div>
       </div>
-      
+
       <!-- Reminders Card -->
       <div class="card light-green" id="card2">
         <div class="indicator green"></div>
@@ -47,27 +51,41 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Quote Card -->
       <div class="card" id="card3">
         <div class="indicator orange"></div>
         <div class="card-title">Daily Quote</div>
         <div class="quote" id="daily-quote">Inspiration goes here...</div>
       </div>
-      
-      <!-- Weather Card -->
-<div class="card light-green" id="card4">
-  <div class="indicator blue"></div>
-  <div class="card-title">Weather</div>
-  <div class="city">City: <span id="weather-city">Loading...</span></div>
-  <div class="temp"><span id="weather-temp">--</span></div>
-  <div id="weather-description" style="margin: 5px 0; font-size: 14px; color: #e56b6f;">Weather: --</div>
-  <div id="weather-icon" style="margin-top: 10px; font-size: 24px; color: var(--accent-blue);">
-    <i class="fas fa-cloud"></i>
-  </div>
-</div>
 
-      
+      <!-- Weather Card -->
+      <div class="card light-green" id="card4">
+        <div class="indicator blue"></div>
+        <div class="card-title">Weather</div>
+        <div class="weather-main">
+          <div class="weather-left">
+            <div class="city"><span id="weather-city">Loading...</span></div>
+            <div class="temp"><span id="weather-temp">--</span></div>
+            <div id="weather-description">--</div>
+          </div>
+          <div id="weather-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+        </div>
+        <div class="weather-details">
+          <div class="weather-detail-item">
+            <i class="fas fa-temperature-high"></i>
+            <span>Feels like: <strong id="feels-like">--</strong></span>
+          </div>
+          <div class="weather-detail-item">
+            <i class="fas fa-tint"></i>
+            <span>Humidity: <strong id="humidity">--</strong></span>
+          </div>
+        </div>
+      </div>
+
+
       <!-- Quick Apps -->
       <div class="card" id="card5">
         <div class="indicator green"></div>
@@ -99,7 +117,7 @@
           </button>
         </div>
       </div>
-      
+
       <!-- News -->
       <div class="card gallery-card" id="news-card">
         <div class="indicator orange"></div>
@@ -109,8 +127,9 @@
         </ul>
       </div>
     </div>
-  
+
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="src/js/script.js"></script>
+
 </html>
