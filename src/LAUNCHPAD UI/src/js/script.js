@@ -303,7 +303,17 @@ function initializePage() {
     checkbox.type = 'checkbox';
     checkbox.className = 'task-checkbox';
 
-    checkbox.addEventListener('change', checkAllTasksCompleted);
+    checkbox.addEventListener('change', function () {
+      // Toggle strikethrough on the task input
+      if (this.checked) {
+        input.style.textDecoration = 'line-through';
+        input.style.opacity = '0.6';
+      } else {
+        input.style.textDecoration = 'none';
+        input.style.opacity = '1';
+      }
+      checkAllTasksCompleted();
+    });
 
     const input = document.createElement('input');
     input.type = 'text';
@@ -331,6 +341,7 @@ function initializePage() {
     taskContainer.appendChild(div);
   }
 
+
   // ================== Confetti on All Tasks Complete ==================
   function checkAllTasksCompleted() {
     const checkboxes = document.querySelectorAll('.task-checkbox');
@@ -347,22 +358,165 @@ function initializePage() {
   }
 
   // ================== Quick Apps ==================
-  document.querySelectorAll('.app-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const app = this.className.split(' ')[1];
-      const links = {
-        instagram: 'https://instagram.com/satyajit_mishra1',
-        youtube: 'https://youtube.com',
-        github: 'https://github.com/satyajitmishra-dev',
-        linkedin: 'https://linkedin.com/satyajitmishra1',
-        twitter: 'https://x.com/satyajit-mishr0',
-        whatsapp: 'https://whatsapp.com',
-        stackoverflow: 'https://stackoverflow.com/',
-        codepen: 'https://codepen.com/'
-      };
-      if (links[app]) window.open(links[app], '_blank');
+  const quickAppsContainer = document.querySelector('.quick-apps');
+  const addAppBtn = document.getElementById('add-app-btn');
+  const addAppModal = document.getElementById('add-app-modal');
+  const closeModalBtn = document.getElementById('close-modal');
+  const cancelAppBtn = document.getElementById('cancel-app');
+  const saveAppBtn = document.getElementById('save-app');
+  const appNameInput = document.getElementById('app-name');
+  const appUrlInput = document.getElementById('app-url');
+
+  // Load custom apps from localStorage
+  let customApps = JSON.parse(localStorage.getItem('customApps')) || [];
+
+  function renderCustomApps() {
+    // Remove existing custom apps
+    document.querySelectorAll('.custom-app-btn').forEach(el => el.remove());
+
+    customApps.forEach((app, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'app-btn custom-app-btn';
+      btn.title = app.name;
+      btn.innerHTML = `
+        <div class="app-icon">
+          <img src="https://www.google.com/s2/favicons?domain=${app.url}&sz=64" alt="${app.name}" onerror="this.src='src/favicon.ico'">
+        </div>
+        ${app.name}
+        <div class="delete-app-btn" data-index="${index}"><i class="fas fa-times"></i></div>
+      `;
+
+      btn.addEventListener('click', (e) => {
+        if (!e.target.closest('.delete-app-btn')) {
+          // Add https:// if not present
+          let url = app.url;
+          if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+          }
+          window.open(url, '_blank');
+        }
+      });
+
+      // Insert before the Add App button
+      if (quickAppsContainer && addAppBtn) {
+        quickAppsContainer.insertBefore(btn, addAppBtn);
+      }
+    });
+
+    // Re-attach delete listeners
+    document.querySelectorAll('.delete-app-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const index = parseInt(btn.dataset.index);
+        customApps.splice(index, 1);
+        localStorage.setItem('customApps', JSON.stringify(customApps));
+        renderCustomApps();
+      });
+    });
+  }
+
+  renderCustomApps();
+
+  // Load deleted default apps from localStorage
+  let deletedDefaultApps = JSON.parse(localStorage.getItem('deletedDefaultApps')) || [];
+
+  // Handle hardcoded apps - Add delete buttons to all
+  document.querySelectorAll('.app-btn:not(.custom-app-btn):not(.add-app-btn)').forEach(btn => {
+    const appClass = btn.className.split(' ')[1]; // Get app name (youtube, github, etc.)
+
+    // Hide app if it was previously deleted
+    if (deletedDefaultApps.includes(appClass)) {
+      btn.remove();
+      return;
+    }
+
+    // Add delete button to each default app
+    const deleteBtn = document.createElement('div');
+    deleteBtn.className = 'delete-app-btn';
+    deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+    btn.appendChild(deleteBtn);
+
+    // Handle app click
+    btn.addEventListener('click', function (e) {
+      if (!e.target.closest('.delete-app-btn')) {
+        const app = this.className.split(' ')[1];
+        const links = {
+          instagram: 'https://instagram.com/satyajit_mishra1',
+          youtube: 'https://youtube.com',
+          github: 'https://github.com/satyajitmishra-dev',
+          linkedin: 'https://linkedin.com/in/satyajitmishra1',
+          twitter: 'https://x.com/satyajit-mishr0',
+          whatsapp: 'https://whatsapp.com',
+          stackoverflow: 'https://stackoverflow.com/',
+          codepen: 'https://codepen.com/'
+        };
+        if (links[app]) window.open(links[app], '_blank');
+      }
+    });
+
+    // Handle delete button click for default apps
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Add to deleted list and save to localStorage
+      deletedDefaultApps.push(appClass);
+      localStorage.setItem('deletedDefaultApps', JSON.stringify(deletedDefaultApps));
+      btn.remove();
     });
   });
+
+  // Modal Logic
+  if (addAppBtn) {
+    addAppBtn.addEventListener('click', () => {
+      if (addAppModal) {
+        addAppModal.classList.add('active');
+        if (appNameInput) appNameInput.focus();
+      }
+    });
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+      if (addAppModal) addAppModal.classList.remove('active');
+      if (appNameInput) appNameInput.value = '';
+      if (appUrlInput) appUrlInput.value = '';
+    });
+  }
+
+  if (cancelAppBtn) {
+    cancelAppBtn.addEventListener('click', () => {
+      if (addAppModal) addAppModal.classList.remove('active');
+      if (appNameInput) appNameInput.value = '';
+      if (appUrlInput) appUrlInput.value = '';
+    });
+  }
+
+  if (saveAppBtn) {
+    saveAppBtn.addEventListener('click', () => {
+      const name = appNameInput ? appNameInput.value.trim() : '';
+      const url = appUrlInput ? appUrlInput.value.trim() : '';
+
+      if (name && url) {
+        customApps.push({ name, url });
+        localStorage.setItem('customApps', JSON.stringify(customApps));
+        renderCustomApps();
+
+        if (addAppModal) addAppModal.classList.remove('active');
+        if (appNameInput) appNameInput.value = '';
+        if (appUrlInput) appUrlInput.value = '';
+      }
+    });
+  }
+
+  // Close modal on outside click
+  if (addAppModal) {
+    addAppModal.addEventListener('click', (e) => {
+      if (e.target === addAppModal) {
+        addAppModal.classList.remove('active');
+        if (appNameInput) appNameInput.value = '';
+        if (appUrlInput) appUrlInput.value = '';
+      }
+    });
+  }
 
   // ================== Fetch Tech News ==================
   function fetchTechNews() {

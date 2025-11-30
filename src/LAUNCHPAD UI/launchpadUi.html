@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="src/css/animations.css">
   <link rel="stylesheet" href="src/css/responsive.css">
   <link rel="stylesheet" href="src/css/darkTheme.css">
+  <link rel="stylesheet" href="src/css/custom-apps.css">
   <link rel="icon" type="image/png" href="src/favicon.ico">
 </head>
 
@@ -85,7 +86,6 @@
         </div>
       </div>
 
-
       <!-- Quick Apps -->
       <div class="card" id="card5">
         <div class="indicator green"></div>
@@ -115,6 +115,9 @@
           <button class="app-btn codepen" title="CodePen">
             <div class="app-icon"><i class="fa-brands fa-codepen fa-fade"></i></div>Code Pen
           </button>
+          <button class="app-btn add-app-btn" id="add-app-btn" title="Add App">
+            <div class="app-icon"><i class="fas fa-plus"></i></div>Add App
+          </button>
         </div>
       </div>
 
@@ -129,8 +132,35 @@
     </div>
 
   </div>
+
+  <!-- Add App Modal -->
+  <div class="modal-overlay" id="add-app-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Quick App</h3>
+        <button class="close-modal" id="close-modal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="app-name">App Name</label>
+          <input type="text" id="app-name" placeholder="e.g. Google">
+        </div>
+        <div class="form-group">
+          <label for="app-url">App URL</label>
+          <input type="url" id="app-url" placeholder="e.g. https://google.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="cancel-app">Cancel</button>
+        <button class="btn-save" id="save-app">Add App</button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="src/js/script.js"></script>
+
+</body>
 
 </html>

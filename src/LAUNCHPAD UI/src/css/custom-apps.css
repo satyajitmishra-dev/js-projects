@@ -1,0 +1,146 @@
+/* Custom Quick Apps Styles */
+
+/* Add App Button */
+.add-app-btn {
+    border: 2px dashed rgba(99, 102, 241, 0.3) !important;
+    background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.add-app-btn:hover {
+    border-color: var(--accent-blue) !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+}
+
+.add-app-btn .app-icon {
+    color: var(--accent-blue) !important;
+}
+
+/* Custom App Icon Image */
+.app-btn img {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* All App Buttons - Position Relative for Delete Button */
+.app-btn {
+    position: relative !important;
+}
+
+/* Delete Button for ALL Apps */
+.delete-app-btn {
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: var(--accent-red) !important;
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 11px !important;
+    opacity: 0 !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+    border: 2px solid white !important;
+    z-index: 10 !important;
+}
+
+/* Show Delete Button on Hover (except Add App button) */
+.app-btn:not(.add-app-btn):hover .delete-app-btn {
+    opacity: 1 !important;
+}
+
+/* Custom Quick Apps Styles */
+
+/* Add App Button */
+.add-app-btn {
+    border: 2px dashed rgba(99, 102, 241, 0.3) !important;
+    background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.add-app-btn:hover {
+    border-color: var(--accent-blue) !important;
+    background: rgba(99, 102, 241, 0.1) !important;
+}
+
+.add-app-btn .app-icon {
+    color: var(--accent-blue) !important;
+}
+
+/* Custom App Icon Image */
+.app-btn img {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* All App Buttons - Position Relative for Delete Button */
+.app-btn {
+    position: relative !important;
+}
+
+/* Delete Button for ALL Apps */
+.delete-app-btn {
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: var(--accent-red) !important;
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 11px !important;
+    opacity: 0 !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
+    border: 2px solid white !important;
+    z-index: 10 !important;
+}
+
+/* Show Delete Button on Hover (except Add App button) */
+.app-btn:not(.add-app-btn):hover .delete-app-btn {
+    opacity: 1 !important;
+}
+
+/* Delete Button Hover Effect */
+.delete-app-btn:hover {
+    transform: scale(1.2) !important;
+    background: #dc2626 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .delete-app-btn {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 13px !important;
+        opacity: 0.7 !important;
+    }
+
+    .app-btn:not(.add-app-btn):hover .delete-app-btn {
+        opacity: 1 !important;
+    }
+}
+
+/* Modal Input Text Visibility Fix */
+.modal-overlay .form-group input {
+    color: #1a1a1a !important;
+    font-weight: 500 !important;
+}
+
+.modal-overlay .form-group input::placeholder {
+    color: #999 !important;
+    opacity: 1 !important;
+}
+
+.modal-overlay .form-group input:focus {
+    color: #000 !important;
+}

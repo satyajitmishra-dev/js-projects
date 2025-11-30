@@ -665,6 +665,7 @@ body {
     transform: rotate(360deg);
   }
 }
+
 /* Pomodoro Timer Styles */
 .pomodoro-container {
   display: flex;
@@ -766,7 +767,7 @@ body {
   background: rgba(255, 255, 255, 0.6);
   color: var(--text-gray);
   font-size: 18px;
-  border: 1px solid rgba(255,255,255,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .settings-toggle:hover {
@@ -786,7 +787,7 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: var(--border-radius);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   padding: 24px;
   transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
@@ -796,45 +797,141 @@ body {
   right: 20px;
 }
 
-.settings-header {
+
+/* Add App Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 400px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid rgba(0,0,0,0.06);
 }
 
-.settings-header h3 {
-  font-size: 20px;
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text-dark);
-  margin: 0;
 }
 
-.settings-close {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.close-modal {
+  background: none;
   border: none;
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--accent-red);
+  font-size: 18px;
+  color: var(--text-gray);
   cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: var(--accent-red);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  color: var(--text-dark);
+  outline: none;
   transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.settings-close:hover {
-  background: var(--accent-red);
-  color: white;
-  transform: rotate(90deg);
+.form-group input:focus {
+  background: white;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.settings-content {
+.modal-footer {
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-cancel {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-gray);
+}
+
+.btn-cancel:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.btn-save {
+  background: var(--accent-blue);
+  color: white;
+}
+
+.btn-save:hover {
+  background: var(--accent-purple);
+  transform: translateY(-1px);
+}
+
+/* Add App Button Style */
 }
 
 .settings-item {
@@ -842,7 +939,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s;
@@ -871,15 +968,20 @@ body {
 
 /* Loading Skeletons */
 .skeleton {
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 25%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.06) 75%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.06) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .skeleton-text {
