@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Launchpad UI - Premium New Tab",
+  "version": "1.0.0",
+  "description": "A beautiful, premium new tab page with weather, tasks, quotes, quick apps, and more!",
+  "author": "Satyajit Mishra",
+  "icons": {
+    "16": "src/favicon.ico",
+    "48": "src/favicon.ico",
+    "128": "src/favicon.ico"
+  },
+  "chrome_url_overrides": {
+    "newtab": "launchpadUi.html"
+  },
+  "permissions": [
+    "storage",
+    "geolocation"
+  ],
+  "host_permissions": [
+    "https://api.quotable.io/*",
+    "https://api.openweathermap.org/*",
+    "https://gnews.io/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
