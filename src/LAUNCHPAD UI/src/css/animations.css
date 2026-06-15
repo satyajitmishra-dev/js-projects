@@ -1,390 +1,77 @@
-/*=========================================================================
-====================== Animations Styles ==================================
-============================================================================*/
+/* ============================================================================
+   LAUNCHPAD UI — Animations
+   All keyframe definitions and animation utility classes.
+   ============================================================================
+   Table of Contents:
+   01. Mesh Gradient Background
+   02. Fade Animations
+   03. Slide Animations
+   04. Scale Animations
+   05. Spinner
+   06. Skeleton Shimmer
+   07. Pulse & Float
+   08. Gradient Border
+   09. Card Entrance & Stagger
+   10. Dot Pulse (Onboarding)
+   11. Ripple Effect
+   12. Shake (Error)
+   13. Slide Up (Modals)
+   14. Animation Utility Classes
+   15. Widget Indicator Pulse
+   16. Reduced Motion (a11y)
+   ========================================================================== */
 
-/* Keyframe Animations - Specific to interactions not covered in style.css */
 
-@keyframes spin-reverse {
-  to {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
+/* ==========================================================================
+   01. MESH GRADIENT BACKGROUND
+   Slow, organic drift for the body::before ambient gradient.
+   ========================================================================== */
 
-@keyframes pulse-blue {
+@keyframes meshGradient {
   0% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+    background-position: 0% 0%, 100% 50%, 50% 100%;
+    background-size: 150% 150%, 130% 130%, 140% 140%;
   }
-
-  70% {
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-  }
-}
-
-@keyframes pulse-green {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-
-  70% {
-    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-@keyframes pulse-orange {
-  0% {
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
-  }
-
-  70% {
-    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
-  }
-}
-
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-  }
-
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-  }
-
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-  }
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Card Highlight for Keyboard Navigation */
-@keyframes cardHighlight {
-
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  }
-
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 12px 48px 0 rgba(99, 102, 241, 0.4);
-  }
-}
-
-/* Shake Animation for Errors */
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-5px);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(5px);
-  }
-}
-
-/* Bounce Animation */
-@keyframes bounce {
-
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-10px);
-  }
-
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-/* Slide In Animations */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Zoom Animations */
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes zoomOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-}
-
-/* Glow Animation */
-@keyframes glow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
-  }
-
-  50% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8), 0 0 30px rgba(99, 102, 241, 0.6);
-  }
-}
-
-/* Ripple Effect */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-/* Float Animation */
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Wiggle Animation */
-@keyframes wiggle {
-
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-
   25% {
-    transform: rotate(-5deg);
+    background-position: 30% 20%, 70% 60%, 40% 80%;
+    background-size: 160% 160%, 140% 140%, 150% 150%;
   }
-
+  50% {
+    background-position: 50% 50%, 50% 30%, 60% 60%;
+    background-size: 140% 140%, 150% 150%, 160% 160%;
+  }
   75% {
-    transform: rotate(5deg);
+    background-position: 70% 30%, 30% 70%, 80% 40%;
+    background-size: 150% 150%, 160% 160%, 140% 140%;
   }
-}
-
-/* Heartbeat Animation */
-@keyframes heartbeat {
-
-  0%,
   100% {
-    transform: scale(1);
-  }
-
-  10%,
-  30% {
-    transform: scale(1.1);
-  }
-
-  20%,
-  40% {
-    transform: scale(1);
+    background-position: 100% 100%, 0% 50%, 50% 0%;
+    background-size: 150% 150%, 130% 130%, 140% 140%;
   }
 }
 
-/* Animation Delays for Staggered Entrance */
-.card:nth-child(1) {
-  animation-delay: 0.1s;
-}
 
-.card:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.card:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.card:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-.card:nth-child(5) {
-  animation-delay: 0.5s;
-}
-
-.card:nth-child(6) {
-  animation-delay: 0.6s;
-}
-
-.card:nth-child(7) {
-  animation-delay: 0.7s;
-}
-
-.card:nth-child(8) {
-  animation-delay: 0.8s;
-}
-
-/* Utility Animation Classes */
-.voice-pulse {
-  animation: pulsate 1.5s infinite;
-}
-
-.theme-transition {
-  animation: rotate 0.5s ease-in-out;
-}
-
-.shake {
-  animation: shake 0.5s ease;
-}
-
-.bounce {
-  animation: bounce 1s ease;
-}
-
-.float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-.wiggle {
-  animation: wiggle 0.5s ease;
-}
-
-.heartbeat {
-  animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-/* Fade Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ==========================================================================
+   02. FADE ANIMATIONS
+   ========================================================================== */
 
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -392,146 +79,393 @@
   from {
     opacity: 1;
   }
-
   to {
     opacity: 0;
   }
 }
 
-/* Rotate Animations */
-@keyframes rotateIn {
+
+/* ==========================================================================
+   03. SLIDE ANIMATIONS
+   ========================================================================== */
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: rotate(-180deg) scale(0.5);
+    transform: translateY(24px) scale(0.98);
   }
-
   to {
     opacity: 1;
-    transform: rotate(0deg) scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes rotateOut {
-  from {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
 
-  to {
-    opacity: 0;
-    transform: rotate(180deg) scale(0.5);
-  }
-}
+/* ==========================================================================
+   04. SCALE ANIMATIONS
+   ========================================================================== */
 
-/* Flip Animations */
-@keyframes flipInX {
+@keyframes scaleIn {
   from {
     opacity: 0;
-    transform: perspective(400px) rotateX(90deg);
+    transform: scale(0.95);
   }
-
   to {
-    opacity: 1;
-    transform: perspective(400px) rotateX(0deg);
-  }
-}
-
-@keyframes flipInY {
-  from {
-    opacity: 0;
-    transform: perspective(400px) rotateY(90deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: perspective(400px) rotateY(0deg);
-  }
-}
-
-/* Elastic Animations */
-@keyframes elasticIn {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  50% {
-    transform: scale(1.2);
-  }
-
-  70% {
-    transform: scale(0.9);
-  }
-
-  100% {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-/* Attention Seekers */
-@keyframes tada {
 
+/* ==========================================================================
+   05. SPINNER
+   ========================================================================== */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ==========================================================================
+   06. SKELETON SHIMMER
+   ========================================================================== */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+/* ==========================================================================
+   07. PULSE & FLOAT
+   ========================================================================== */
+
+@keyframes pulse {
   0%,
   100% {
-    transform: scale(1) rotate(0deg);
+    transform: scale(1);
+    opacity: 1;
   }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
 
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+
+/* ==========================================================================
+   08. GRADIENT BORDER
+   ========================================================================== */
+
+@keyframes gradientBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* ==========================================================================
+   09. CARD ENTRANCE & STAGGER
+   Widgets enter with a subtle lift + fade, staggered by index.
+   ========================================================================== */
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px var(--glow-indigo);
+  }
+  50% {
+    box-shadow: 0 12px 48px rgba(124, 92, 252, 0.25);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ── Dynamic Staggered entrance delays ── */
+.widget {
+  animation: floatUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--widget-index, 1) * 0.06s);
+  opacity: 0;
+}
+
+
+/* ==========================================================================
+   10. DOT PULSE (Onboarding)
+   ========================================================================== */
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================================================
+   11. RIPPLE EFFECT
+   ========================================================================== */
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+
+/* ==========================================================================
+   12. SHAKE (Error State)
+   ========================================================================== */
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
   10%,
-  20% {
-    transform: scale(0.9) rotate(-3deg);
-  }
-
   30%,
   50%,
   70%,
   90% {
-    transform: scale(1.1) rotate(3deg);
+    transform: translateX(-4px);
   }
-
+  20%,
   40%,
   60%,
   80% {
-    transform: scale(1.1) rotate(-3deg);
+    transform: translateX(4px);
   }
 }
 
-@keyframes jello {
 
-  0%,
+/* ==========================================================================
+   13. (slideUp already defined above in section 03)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   14. ANIMATION UTILITY CLASSES
+   Apply these classes via JS or HTML for quick animations.
+   ========================================================================== */
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease forwards;
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+
+/* ==========================================================================
+   15. WIDGET INDICATOR PULSE
+   Status dots pulse gently to signal live data.
+   ========================================================================== */
+
+.widget-indicator {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+
+/* ==========================================================================
+   17. AURORA BLOBS & SEARCH BAR GRADIENT
+   ========================================================================== */
+
+@keyframes floatAurora {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(40px, -60px) scale(1.2) rotate(120deg);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.8) rotate(240deg);
+  }
   100% {
-    transform: skewX(0deg) skewY(0deg);
-  }
-
-  30% {
-    transform: skewX(25deg) skewY(25deg);
-  }
-
-  40% {
-    transform: skewX(-15deg) skewY(-15deg);
-  }
-
-  50% {
-    transform: skewX(15deg) skewY(15deg);
-  }
-
-  65% {
-    transform: skewX(-5deg) skewY(-5deg);
-  }
-
-  75% {
-    transform: skewX(5deg) skewY(5deg);
+    transform: translate(0, 0) scale(1) rotate(360deg);
   }
 }
 
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
+@keyframes rotateBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
+@keyframes lightParticles {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-30px) scale(1.3);
+  }
+}
+
+
+/* ==========================================================================
+   16. REDUCED MOTION (Accessibility)
+   Respects the user's OS preference for reduced motion.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body::before {
+    animation: none;
+  }
+
+  .widget {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .widget:hover {
+    transform: none;
+  }
+
+  .widget-indicator {
+    animation: none;
+  }
+
+  .loader-spinner {
+    animation: spin 1.5s linear infinite;
+    /* Keep spinner for functional feedback, but slower */
   }
 }

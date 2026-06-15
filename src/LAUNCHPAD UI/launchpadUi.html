@@ -2,164 +2,918 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> LaunchPad UI || by Satyajit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="LaunchPad — Your personal developer operating system. A customizable, fast, and beautiful productivity dashboard for developers.">
+  <title>LaunchPad | Developer OS</title>
+  <link rel="icon" href="src/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="src/css/style.css">
   <link rel="stylesheet" href="src/css/animations.css">
   <link rel="stylesheet" href="src/css/responsive.css">
-  <link rel="stylesheet" href="src/css/darkTheme.css">
-  <link rel="stylesheet" href="src/css/custom-apps.css">
-  <link rel="icon" type="image/png" href="src/favicon.ico">
 </head>
 
 <body>
 
-  <div class="loader-container" id="loader">
-    <div class="loader"></div>
+  <!-- SVG Filter for Noise Texture -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none; opacity: 0;">
+    <filter id="noise-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.07 0" />
+    </filter>
+  </svg>
+
+  <!-- Animated Aurora Blobs -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob blob-violet"></div>
+    <div class="aurora-blob blob-blue"></div>
+    <div class="aurora-blob blob-pink"></div>
+    <div class="aurora-blob blob-cyan"></div>
   </div>
 
-  <div class="content" id="content">
-    <div class="search-container">
-      <i class="fa-brands fa-google search-icon fa-fade"></i>
-      <input type="text" class="search-input" id="google-search" placeholder="Search in Google"
-        aria-label="Google Search">
-      <button class="search-btn" id="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
-      <button class="voice-btn" id="voice-btn" aria-label="Voice Search"><i class="fas fa-microphone"></i></button>
-      <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode"><i
-          class="fas fa-moon"></i></button>
-      <div class="profile-icon" title="Profile"><i class="fas fa-user"></i></div>
+  <!-- ========== 1. ONBOARDING WIZARD ========== -->
+  <div id="onboarding-wizard" class="hidden" role="dialog" aria-label="Onboarding wizard">
+    <div class="onboard-wizard-container">
+      
+      <!-- Top Center Progress Indicator -->
+      <div class="onboard-header">
+        <div class="onboard-progress-label">System Setup — <span id="onboard-step-text">Step 1 of 5</span></div>
+        <div class="onboard-progress-bar-container">
+          <div id="onboard-progress-fill" class="onboard-progress-fill" style="width: 20%;"></div>
+        </div>
+      </div>
+
+      <!-- Split Screen Layout -->
+      <div class="onboard-split">
+        
+        <!-- Left: Interactive Setup Steps -->
+        <div class="onboard-left">
+          
+          <!-- Step 1: Welcome & Identity -->
+          <div class="onboarding-step active" data-step="1">
+            <div class="onboard-step-badge">01 // IDENTITY</div>
+            <h1>How should LaunchPad call you?</h1>
+            <p>Enter your username and profiles to personalize your system greeting and widget integration.</p>
+            
+            <div class="form-field">
+              <label for="onboard-name">Your Name</label>
+              <input type="text" id="onboard-name" placeholder="Developer" aria-label="Your Name" autocomplete="off">
+            </div>
+            
+            <div class="form-field">
+              <label for="onboard-github">GitHub Username</label>
+              <input type="text" id="onboard-github" placeholder="octocat" aria-label="GitHub Username" autocomplete="off">
+            </div>
+
+            <div class="form-field">
+              <label for="onboard-leetcode">LeetCode Username (optional)</label>
+              <input type="text" id="onboard-leetcode" placeholder="your-username" aria-label="LeetCode Username" autocomplete="off">
+            </div>
+
+            <div class="onboard-nav-buttons">
+              <button id="onboard-skip" class="btn-ghost" aria-label="Skip Setup">Skip Setup</button>
+              <button id="onboard-next-1" class="btn-primary" aria-label="Next step">Next step <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 2: Theme Selection -->
+          <div class="onboarding-step" data-step="2">
+            <div class="onboard-step-badge">02 // APPEARANCE</div>
+            <h2>Select your system visual preset</h2>
+            <p>Visual theme styles apply system-wide, setting card glass elements and colored accents.</p>
+
+            <div class="onboard-theme-grid">
+              <button class="theme-option active" data-theme="aurora" aria-label="Aurora theme">
+                <span class="theme-color-preview preview-aurora"></span>
+                <span class="theme-option-name">Aurora Preset</span>
+              </button>
+              <button class="theme-option" data-theme="cyberpunk" aria-label="Cyberpunk theme">
+                <span class="theme-color-preview preview-cyberpunk"></span>
+                <span class="theme-option-name">Cyberpunk</span>
+              </button>
+              <button class="theme-option" data-theme="minimal" aria-label="Minimal Glass theme">
+                <span class="theme-color-preview preview-minimal"></span>
+                <span class="theme-option-name">Minimal Glass</span>
+              </button>
+              <button class="theme-option" data-theme="neon" aria-label="Neon Dark theme">
+                <span class="theme-color-preview preview-neon"></span>
+                <span class="theme-option-name">Neon Dark</span>
+              </button>
+            </div>
+
+            <div class="onboard-nav-buttons">
+              <button id="onboard-prev-2" class="btn-secondary" aria-label="Back">Back</button>
+              <button id="onboard-next-2" class="btn-primary" aria-label="Next step">Next step <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 3: Widgets Configuration -->
+          <div class="onboarding-step" data-step="3">
+            <div class="onboard-step-badge">03 // WIDGETS</div>
+            <h2>Configure active widgets</h2>
+            <p>Toggle widgets to keep your layout organized. Drag handles to reorder priority.</p>
+
+            <div class="draggable-widgets-container">
+              <ul id="onboard-widgets-list" class="onboard-widgets-list">
+                <li class="onboard-widget-item" data-widget="clock">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-clock widget-icon-color"></i>
+                    <span>Local Time</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="clock" checked aria-label="Toggle clock">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="weather">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-cloud-sun widget-icon-color"></i>
+                    <span>Weather</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="weather" checked aria-label="Toggle weather">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="tasks">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-tasks widget-icon-color"></i>
+                    <span>Tasks</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="tasks" checked aria-label="Toggle tasks">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="pomodoro">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-stopwatch widget-icon-color"></i>
+                    <span>Pomodoro Timer</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="pomodoro" aria-label="Toggle pomodoro">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="notes">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-sticky-note widget-icon-color"></i>
+                    <span>Notes</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="notes" checked aria-label="Toggle notes">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="news">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-newspaper widget-icon-color"></i>
+                    <span>Tech News</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="news" aria-label="Toggle news">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="calendar">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fas fa-calendar-alt widget-icon-color"></i>
+                    <span>Calendar</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="calendar" checked aria-label="Toggle calendar">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+                <li class="onboard-widget-item" data-widget="github">
+                  <div class="widget-drag-info">
+                    <span class="onboard-drag-handle"><i class="fas fa-grip-vertical"></i></span>
+                    <i class="fab fa-github widget-icon-color"></i>
+                    <span>GitHub Activity</span>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" class="onboard-widget-toggle" data-widget="github" aria-label="Toggle github">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="onboard-nav-buttons">
+              <button id="onboard-prev-3" class="btn-secondary" aria-label="Back">Back</button>
+              <button id="onboard-next-3" class="btn-primary" aria-label="Next step">Next step <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 4: Productivity Preferences -->
+          <div class="onboarding-step" data-step="4">
+            <div class="onboard-step-badge">04 // PREFERENCES</div>
+            <h2>Establish productivity preferences</h2>
+            <p>Adjust system thresholds. These can be adjusted anytime inside settings.</p>
+
+            <div class="form-field">
+              <div class="slider-label-row">
+                <label for="pref-focus">Focus Duration</label>
+                <span class="slider-value-badge"><span id="focus-val">25</span> min</span>
+              </div>
+              <input type="range" id="pref-focus" min="10" max="60" value="25" step="5" class="onboard-slider-input" aria-label="Focus Duration">
+            </div>
+
+            <div class="form-field">
+              <div class="slider-label-row">
+                <label for="pref-break">Break Duration</label>
+                <span class="slider-value-badge"><span id="break-val">5</span> min</span>
+              </div>
+              <input type="range" id="pref-break" min="5" max="30" value="5" step="5" class="onboard-slider-input" aria-label="Break Duration">
+            </div>
+
+            <div class="form-field">
+              <div class="slider-label-row">
+                <label for="pref-goals">Daily Goals Count</label>
+                <span class="slider-value-badge"><span id="goals-val">3</span> goals</span>
+              </div>
+              <input type="range" id="pref-goals" min="1" max="10" value="3" step="1" class="onboard-slider-input" aria-label="Daily Goals Count">
+            </div>
+
+            <div class="onboard-nav-buttons">
+              <button id="onboard-prev-4" class="btn-secondary" aria-label="Back">Back</button>
+              <button id="onboard-next-4" class="btn-primary" aria-label="Next step">Next step <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 5: Boot Sequence -->
+          <div class="onboarding-step" data-step="5">
+            <div class="onboard-step-badge">05 // INITIALIZE</div>
+            <h2>Your Developer OS is ready</h2>
+            <p>Click below to initialize the boot sequence, configure visual layers, and mount active modules.</p>
+
+            <div class="boot-sequence-box">
+              <div class="boot-line">&gt; Loading LaunchPad kernel... DONE</div>
+              <div class="boot-line">&gt; Injecting Aurora glass shaders... DONE</div>
+              <div class="boot-line">&gt; Mounting active user modules... READY</div>
+              <div class="boot-line glow-text">&gt; System state: STABLE // READY TO LAUNCH</div>
+            </div>
+
+            <div class="onboard-nav-buttons justify-center">
+              <button id="onboard-prev-5" class="btn-secondary" aria-label="Back">Back</button>
+              <button id="onboard-finish" class="btn-primary btn-lg boot-btn" aria-label="Launch Dashboard">
+                <i class="fas fa-power-off"></i> Initialize system
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Real-time Live Preview Panel -->
+        <div class="onboard-right">
+          <div class="onboard-preview-wrapper">
+            <div class="preview-header-bar">
+              <div class="preview-header-dots"><span></span><span></span><span></span></div>
+              <div class="preview-header-title">system_preview.log</div>
+            </div>
+            
+            <div class="preview-screen" id="onboard-preview-screen">
+              <!-- Live Greeting -->
+              <div class="preview-greeting">Hello, <span id="prev-greeting-name">Developer</span></div>
+              
+              <!-- Mini Bento Grid Mock -->
+              <div class="preview-grid">
+                <div class="mini-card" data-widget="clock">
+                  <div class="mini-label">CLOCK</div>
+                  <div class="mini-val">10:42 AM</div>
+                </div>
+                <div class="mini-card" data-widget="weather">
+                  <div class="mini-label">WEATHER</div>
+                  <div class="mini-val">72°F // Sunny</div>
+                </div>
+                <div class="mini-card span-2" data-widget="tasks">
+                  <div class="mini-label">TASKS</div>
+                  <div class="mini-task-item"><span class="bullet"></span> Redesign Setup UI</div>
+                  <div class="mini-task-item opacity-50"><span class="bullet checked"></span> Set Name</div>
+                </div>
+                <div class="mini-card" data-widget="pomodoro">
+                  <div class="mini-label">POMODORO</div>
+                  <div class="mini-pomo"><span id="prev-pomo-val">25</span>m</div>
+                </div>
+                <div class="mini-card" data-widget="notes">
+                  <div class="mini-label">NOTES</div>
+                  <div class="mini-notes-preview">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                  </div>
+                </div>
+                <div class="mini-card span-2" data-widget="github">
+                  <div class="mini-label">GITHUB</div>
+                  <div class="mini-gh-dots-row">
+                    <span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="mini-card" data-widget="news">
+                  <div class="mini-label">NEWS</div>
+                  <div class="mini-val">OS Boot v1.2</div>
+                </div>
+                <div class="mini-card" data-widget="calendar">
+                  <div class="mini-label">CALENDAR</div>
+                  <div class="mini-val">JUNE 15</div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-
-    <div class="container" id="card-container">
-      <!-- Time Card -->
-      <div class="card" id="card1">
-        <div class="indicator blue"></div>
-        <div class="card-title">Local Time</div>
-        <div class="time" id="current-time">--:--</div>
-        <div class="date" id="current-date">--/--/----</div>
-      </div>
-
-      <!-- Reminders Card -->
-      <div class="card light-green" id="card2">
-        <div class="indicator green"></div>
-        <div class="card-title">Reminders</div>
-        <div class="task-container">
-          <div style="display: flex; align-items: center;">
-            <input type="checkbox" class="task-checkbox" disabled>
-            <input type="text" class="task-input" id="main-task-input" placeholder="Add a task...">
-          </div>
-        </div>
-      </div>
-
-      <!-- Quote Card -->
-      <div class="card" id="card3">
-        <div class="indicator orange"></div>
-        <div class="card-title">Daily Quote</div>
-        <div class="quote" id="daily-quote">Inspiration goes here...</div>
-      </div>
-
-      <!-- Weather Card -->
-      <div class="card light-green" id="card4">
-        <div class="indicator blue"></div>
-        <div class="card-title">Weather</div>
-        <div class="weather-main">
-          <div class="weather-left">
-            <div class="city"><span id="weather-city">Loading...</span></div>
-            <div class="temp"><span id="weather-temp">--</span></div>
-            <div id="weather-description">--</div>
-          </div>
-          <div id="weather-icon">
-            <i class="fas fa-cloud"></i>
-          </div>
-        </div>
-        <div class="weather-details">
-          <div class="weather-detail-item">
-            <i class="fas fa-temperature-high"></i>
-            <span>Feels like: <strong id="feels-like">--</strong></span>
-          </div>
-          <div class="weather-detail-item">
-            <i class="fas fa-tint"></i>
-            <span>Humidity: <strong id="humidity">--</strong></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Apps -->
-      <div class="card" id="card5">
-        <div class="indicator green"></div>
-        <div class="card-title">Quick Apps</div>
-        <div class="quick-apps">
-          <button class="app-btn youtube" title="YouTube">
-            <div class="app-icon"><i class="fa-brands fa-youtube fa-fade"></i></div>YouTube
-          </button>
-          <button class="app-btn github" title="GitHub">
-            <div class="app-icon"><i class="fa-brands fa-github fa-fade"></i></div>GitHub
-          </button>
-          <button class="app-btn linkedin" title="LinkedIn">
-            <div class="app-icon"><i class="fa-brands fa-linkedin-in fa-fade"></i></div>LinkedIn
-          </button>
-          <button class="app-btn instagram" title="Instagram">
-            <div class="app-icon"><i class="fa-brands fa-instagram fa-fade"></i></div>Instagram
-          </button>
-          <button class="app-btn twitter" title="Twitter">
-            <div class="app-icon"><i class="fa-brands fa-twitter fa-fade"></i></div>Twitter
-          </button>
-          <button class="app-btn stackoverflow" title="Stackoverflow">
-            <div class="app-icon"><i class="fa-brands fa-stack-overflow fa-fade"></i></div>Stack Overflow
-          </button>
-          <button class="app-btn whatsapp" title="whatsapp">
-            <div class="app-icon"><i class="fa-brands fa-whatsapp fa-fade"></i></div>Whatsapp
-          </button>
-          <button class="app-btn codepen" title="CodePen">
-            <div class="app-icon"><i class="fa-brands fa-codepen fa-fade"></i></div>Code Pen
-          </button>
-          <button class="app-btn add-app-btn" id="add-app-btn" title="Add App">
-            <div class="app-icon"><i class="fas fa-plus"></i></div>Add App
-          </button>
-        </div>
-      </div>
-
-      <!-- News -->
-      <div class="card gallery-card" id="news-card">
-        <div class="indicator orange"></div>
-        <h3><i class="fas fa-newspaper"></i> Tech News</h3>
-        <ul id="news-list">
-          <li>Loading news...</li>
-        </ul>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Add App Modal -->
-  <div class="modal-overlay" id="add-app-modal">
-    <div class="modal-content">
+  <!-- ========== 2. APP LOADER ========== -->
+  <div id="app-loader" role="status" aria-label="Loading application">
+    <div class="loader-spinner" aria-hidden="true"></div>
+    <div class="loader-text">Initializing LaunchPad...</div>
+  </div>
+
+  <!-- ========== 3. MAIN APP ========== -->
+  <div id="app" class="hidden">
+
+    <!-- 3a. TOP BAR -->
+    <nav class="top-bar" role="navigation" aria-label="Main navigation">
+      <div class="nav-container">
+        <div class="nav-left">
+          <div class="brand">
+            <span class="brand-icon" aria-hidden="true"><i class="fas fa-rocket"></i></span>
+            <span class="brand-text">LaunchPad</span>
+          </div>
+          <span id="greeting" class="greeting"></span>
+        </div>
+        <div class="nav-right">
+          <button id="cmd-k-trigger" class="nav-btn" title="Command Palette (Ctrl+K)" aria-label="Open command palette">
+            <i class="fas fa-terminal" aria-hidden="true"></i>
+            <span class="kbd-hint">Ctrl+K</span>
+          </button>
+          <button id="theme-toggle" class="nav-btn" title="Toggle Theme" aria-label="Toggle theme">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </button>
+          <button id="settings-trigger" class="nav-btn" title="Settings" aria-label="Open settings">
+            <i class="fas fa-cog" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 3b. HERO SEARCH -->
+    <section class="hero-search" aria-label="Search">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+        <input id="search-input" type="text" placeholder="Search Google or type a command..." autocomplete="off"
+          aria-label="Search">
+        <div class="search-actions">
+          <button id="voice-btn" class="search-action-btn" title="Voice Search" aria-label="Voice search">
+            <i class="fas fa-microphone" aria-hidden="true"></i>
+          </button>
+          <button id="search-btn" class="search-action-btn" title="Search" aria-label="Search Google">
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3c. BENTO GRID -->
+    <main>
+      <div class="bento-grid" id="bento-grid">
+
+        <!-- WIDGET: CLOCK -->
+        <article class="widget" id="widget-clock" data-widget="clock" data-lazy style="--widget-index: 1;">
+          <div class="widget-header">
+            <span class="widget-label">Local Time</span>
+            <span class="widget-indicator indicator-blue"></span>
+          </div>
+          <div class="widget-body">
+            <div style="display: flex; align-items: baseline; gap: 4px;">
+              <div id="clock-time" class="clock-time">--:--</div>
+              <div id="clock-ampm" class="clock-ampm">--</div>
+            </div>
+            <div id="clock-date" class="clock-date">---</div>
+            <div id="clock-seconds" class="clock-seconds">:00</div>
+          </div>
+        </article>
+
+        <!-- WIDGET: WEATHER -->
+        <article class="widget" id="widget-weather" data-widget="weather" data-lazy style="--widget-index: 2;">
+          <div class="widget-header">
+            <span class="widget-label">Weather</span>
+            <span class="widget-indicator indicator-cyan"></span>
+          </div>
+          <div class="widget-body">
+            <div class="weather-top">
+              <div class="weather-info">
+                <div id="weather-city" class="weather-city">Loading...</div>
+                <div id="weather-temp" class="weather-temp">--°</div>
+                <div id="weather-desc" class="weather-desc">--</div>
+              </div>
+              <div id="weather-icon-display" class="weather-icon-lg">
+                <i class="fas fa-cloud" aria-hidden="true"></i>
+              </div>
+            </div>
+            <div class="weather-stats">
+              <div class="weather-stat">
+                <i class="fas fa-temperature-high" aria-hidden="true"></i>
+                <span>Feels <strong id="weather-feels">--°</strong></span>
+              </div>
+              <div class="weather-stat">
+                <i class="fas fa-droplet" aria-hidden="true"></i>
+                <span><strong id="weather-humidity">--%</strong></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- WIDGET: TASKS -->
+        <article class="widget" id="widget-tasks" data-widget="tasks" style="--widget-index: 3;">
+          <div class="widget-header">
+            <span class="widget-label">Tasks</span>
+            <span class="widget-indicator indicator-green"></span>
+            <span id="task-count" class="widget-badge">0</span>
+          </div>
+          <div class="widget-body">
+            <div class="task-input-row">
+              <input id="task-input" class="task-input-field" type="text" placeholder="Add a task..."
+                aria-label="Add task">
+              <button id="add-task-btn" class="task-add-btn" title="Add task" aria-label="Add task">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div id="task-list" class="task-list"></div>
+            <div id="task-empty" class="task-empty hidden">
+              <i class="fas fa-check-circle" aria-hidden="true"></i>
+              <span>All clear! Add a task above.</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- WIDGET: QUOTE -->
+        <article class="widget" id="widget-quote" data-widget="quote" style="--widget-index: 4;">
+          <div class="widget-header">
+            <span class="widget-label">Daily Quote</span>
+            <span class="widget-indicator indicator-amber"></span>
+          </div>
+          <div class="widget-body">
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <p id="quote-text" class="quote-text">Loading inspiration...</p>
+            <p id="quote-author" class="quote-author"></p>
+          </div>
+          <button id="refresh-quote" class="widget-action-btn" title="New Quote" aria-label="Get new quote">
+            <i class="fas fa-refresh" aria-hidden="true"></i>
+          </button>
+        </article>
+
+        <!-- WIDGET: QUICK APPS -->
+        <article class="widget" id="widget-apps" data-widget="quickApps" style="--widget-index: 5;">
+          <div class="widget-header">
+            <span class="widget-label">Quick Apps</span>
+            <span class="widget-indicator indicator-violet"></span>
+          </div>
+          <div class="widget-body">
+            <div id="apps-grid" class="apps-grid"></div>
+            <button id="add-app-trigger" class="app-btn app-btn-add" title="Add App" aria-label="Add app">
+              <div class="app-btn-icon"><i class="fas fa-plus" aria-hidden="true"></i></div>
+              <span>Add</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- WIDGET: NEWS -->
+        <article class="widget" id="widget-news" data-widget="news" data-lazy style="--widget-index: 6;">
+          <div class="widget-header">
+            <span class="widget-label"><i class="fas fa-newspaper" aria-hidden="true"></i> Tech News</span>
+            <span class="widget-indicator indicator-rose"></span>
+          </div>
+          <div class="widget-body">
+            <ul id="news-list" class="news-list">
+              <li class="news-skeleton" aria-hidden="true"></li>
+              <li class="news-skeleton" aria-hidden="true"></li>
+              <li class="news-skeleton" aria-hidden="true"></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- WIDGET: POMODORO -->
+        <article class="widget" id="widget-pomodoro" data-widget="pomodoro" style="--widget-index: 7;">
+          <div class="widget-header">
+            <span class="widget-label">Pomodoro</span>
+            <span class="widget-indicator indicator-indigo"></span>
+          </div>
+          <div class="widget-body pomodoro-body">
+            <div class="pomodoro-ring">
+              <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="pomodoro-bg" cx="60" cy="60" r="54"></circle>
+                <circle id="pomodoro-progress" class="pomodoro-fg" cx="60" cy="60" r="54"></circle>
+              </svg>
+            </div>
+            <div class="pomodoro-center">
+              <div id="pomodoro-time" class="pomodoro-time">25:00</div>
+              <div id="pomodoro-label" class="pomodoro-label">Focus</div>
+            </div>
+            <div class="pomodoro-controls">
+              <button id="pomo-start" class="pomo-btn" title="Start" aria-label="Start Pomodoro">
+                <i class="fas fa-play" aria-hidden="true"></i>
+              </button>
+              <button id="pomo-pause" class="pomo-btn hidden" title="Pause" aria-label="Pause Pomodoro">
+                <i class="fas fa-pause" aria-hidden="true"></i>
+              </button>
+              <button id="pomo-reset" class="pomo-btn" title="Reset" aria-label="Reset Pomodoro">
+                <i class="fas fa-rotate-left" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div id="pomo-sessions" class="pomodoro-sessions">Sessions: 0</div>
+          </div>
+        </article>
+
+        <!-- WIDGET: GITHUB -->
+        <article class="widget" id="widget-github" data-widget="github" data-lazy style="--widget-index: 8;">
+          <div class="widget-header">
+            <span class="widget-label"><i class="fab fa-github" aria-hidden="true"></i> GitHub</span>
+            <span class="widget-indicator indicator-green"></span>
+            <span id="gh-username" class="widget-badge-text">@octocat</span>
+          </div>
+          <div class="widget-body">
+            <div id="gh-grid" class="github-grid"></div>
+            <div id="gh-stats" class="github-stats">
+              <span id="gh-contributions">-- contributions this year</span>
+            </div>
+            <div id="gh-error" class="github-error hidden">
+              <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
+              <span>Could not load GitHub data</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- WIDGET: GOALS -->
+        <article class="widget" id="widget-goals" data-widget="goals" style="--widget-index: 9;">
+          <div class="widget-header">
+            <span class="widget-label">Daily Goals</span>
+            <span class="widget-indicator indicator-emerald"></span>
+            <span id="goals-progress" class="widget-badge">0/0</span>
+          </div>
+          <div class="widget-body">
+            <div class="goal-input-row">
+              <input id="goal-input" class="goal-input-field" type="text" placeholder="Add a goal..."
+                aria-label="Add a goal">
+              <button id="add-goal-btn" class="goal-add-btn" title="Add goal" aria-label="Add goal">
+                <i class="fas fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div id="goal-list" class="goal-list"></div>
+            <div class="goal-progress-bar">
+              <div id="goal-progress-fill" class="goal-progress-fill"></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- WIDGET: NOTES -->
+        <article class="widget" id="widget-notes" data-widget="notes" style="--widget-index: 10;">
+          <div class="widget-header">
+            <span class="widget-label">Notes</span>
+            <span class="widget-indicator indicator-amber"></span>
+            <span id="note-chars" class="widget-badge-text">0 chars</span>
+          </div>
+          <div class="widget-body">
+            <textarea id="notes-area" class="notes-textarea" placeholder="Write your thoughts..."
+              aria-label="Notes"></textarea>
+          </div>
+        </article>
+
+        <!-- WIDGET: CALENDAR -->
+        <article class="widget" id="widget-calendar" data-widget="calendar" style="--widget-index: 11;">
+          <div class="widget-header">
+            <span class="widget-label">Calendar</span>
+            <span class="widget-indicator indicator-blue"></span>
+          </div>
+          <div class="widget-body">
+            <div class="cal-nav">
+              <button id="cal-prev" class="cal-nav-btn" title="Previous month" aria-label="Previous month">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <span id="cal-month-year" class="cal-month-label"></span>
+              <button id="cal-next" class="cal-nav-btn" title="Next month" aria-label="Next month">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="cal-weekdays">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+            </div>
+            <div id="cal-days" class="cal-days"></div>
+          </div>
+        </article>
+
+        <!-- WIDGET: FOCUS MODE -->
+        <article class="widget" id="widget-focus" data-widget="focusMode" style="--widget-index: 12;">
+          <div class="widget-header">
+            <span class="widget-label">Focus Mode</span>
+            <span class="widget-indicator indicator-violet"></span>
+          </div>
+          <div class="widget-body focus-body">
+            <div class="focus-icon" aria-hidden="true">
+              <i class="fas fa-crosshairs"></i>
+            </div>
+            <p class="focus-desc">Hide distractions and focus on what matters</p>
+            <button id="focus-toggle" class="btn-primary focus-btn" aria-label="Enter Focus Mode">Enter Focus</button>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- ========== 3d. FOOTER ========== -->
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <i class="fas fa-rocket" aria-hidden="true"></i>
+          <span>LaunchPad OS</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://github.com/satyajit-mishra-dev" class="footer-link" target="_blank" rel="noopener">GitHub</a>
+          <a href="PRIVACY_POLICY.md" class="footer-link">Privacy</a>
+          <a href="https://github.com/satyajit-mishra-dev" class="footer-link" target="_blank" rel="noopener">About</a>
+        </nav>
+        <div class="footer-meta">
+          <span>&copy; 2026 LaunchPad. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- END MAIN APP -->
+
+  <!-- ========== 4. COMMAND PALETTE ========== -->
+  <div id="command-palette" class="modal-overlay hidden" role="dialog" aria-label="Command palette">
+    <div class="cmd-palette">
+      <div class="cmd-header">
+        <i class="fas fa-terminal" aria-hidden="true"></i>
+        <input id="cmd-input" type="text" placeholder="Type a command..." autocomplete="off"
+          aria-label="Command palette">
+      </div>
+      <div id="cmd-results" class="cmd-results"></div>
+      <div class="cmd-footer">
+        <span>Navigate </span><kbd>↑↓</kbd>
+        <span> Select </span><kbd>Enter</kbd>
+        <span> Close </span><kbd>Esc</kbd>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 5. SETTINGS PANEL ========== -->
+  <div id="settings-panel" class="settings-overlay hidden" role="dialog" aria-label="Settings panel">
+    <div class="settings-drawer">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button id="settings-close" class="settings-close-btn" title="Close settings" aria-label="Close settings">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Section: Profile -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Profile</h3>
+        <div class="form-field">
+          <label for="setting-name">Name</label>
+          <input id="setting-name" type="text" aria-label="Name">
+        </div>
+        <div class="form-field">
+          <label for="setting-github">GitHub Username</label>
+          <input id="setting-github" type="text" aria-label="GitHub Username">
+          <small id="gh-validation" class="validation-msg"></small>
+        </div>
+        <div class="form-field">
+          <label for="setting-leetcode">LeetCode Username</label>
+          <input id="setting-leetcode" type="text" aria-label="LeetCode Username">
+          <small id="lc-validation" class="validation-msg"></small>
+        </div>
+        <div class="form-field">
+          <label for="setting-location">Location</label>
+          <div class="input-with-btn">
+            <input id="setting-location" type="text" placeholder="City name or use geolocation" aria-label="Location">
+            <button id="setting-use-geo" class="btn-sm" title="Detect location" aria-label="Detect location">
+              <i class="fas fa-location-dot" aria-hidden="true"></i> Detect
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Appearance -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Appearance</h3>
+        <div class="setting-row">
+          <span>Theme</span>
+          <div class="theme-switch-group">
+            <button id="setting-theme-dark" class="theme-sw-btn" aria-label="Dark theme">Dark</button>
+            <button id="setting-theme-light" class="theme-sw-btn" aria-label="Light theme">Light</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <span>Accent Color</span>
+        </div>
+        <div class="accent-options">
+          <button class="accent-option" data-accent="#6366f1" title="Indigo" aria-label="Indigo accent"></button>
+          <button class="accent-option" data-accent="#10b981" title="Emerald" aria-label="Emerald accent"></button>
+          <button class="accent-option" data-accent="#f43f5e" title="Rose" aria-label="Rose accent"></button>
+          <button class="accent-option" data-accent="#f59e0b" title="Amber" aria-label="Amber accent"></button>
+          <button class="accent-option" data-accent="#06b6d4" title="Cyan" aria-label="Cyan accent"></button>
+          <button class="accent-option" data-accent="#8b5cf6" title="Violet" aria-label="Violet accent"></button>
+          <input id="custom-accent" type="color" title="Custom color" aria-label="Custom accent color">
+        </div>
+      </div>
+
+      <!-- Section: Widgets -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Widgets</h3>
+        <div class="setting-row">
+          <span>Clock</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="clock" checked aria-label="Toggle Clock widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Weather</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="weather" checked
+              aria-label="Toggle Weather widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Tasks</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="tasks" checked aria-label="Toggle Tasks widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Quote</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="quote" checked aria-label="Toggle Quote widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Quick Apps</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="quickApps" checked
+              aria-label="Toggle Quick Apps widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>News</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="news" checked aria-label="Toggle News widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Pomodoro</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="pomodoro" checked
+              aria-label="Toggle Pomodoro widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>GitHub</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="github" checked aria-label="Toggle GitHub widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Goals</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="goals" checked aria-label="Toggle Goals widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Notes</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="notes" checked aria-label="Toggle Notes widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Calendar</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="calendar" checked
+              aria-label="Toggle Calendar widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <span>Focus Mode</span>
+          <label class="toggle-switch">
+            <input class="widget-toggle" type="checkbox" data-widget="focusMode" checked
+              aria-label="Toggle Focus Mode widget">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section: Data & Backup -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Data &amp; Backup</h3>
+        <button id="export-btn" class="btn-secondary btn-block" aria-label="Export Settings">
+          <i class="fas fa-download" aria-hidden="true"></i> Export Settings
+        </button>
+        <button id="import-btn" class="btn-secondary btn-block" aria-label="Import Settings">
+          <i class="fas fa-upload" aria-hidden="true"></i> Import Settings
+        </button>
+        <input id="import-file" type="file" accept=".json" class="hidden" aria-label="Import settings file">
+        <hr>
+        <button id="reset-btn" class="btn-danger btn-block" aria-label="Reset Dashboard">
+          <i class="fas fa-trash-alt" aria-hidden="true"></i> Reset Dashboard
+        </button>
+      </div>
+
+      <!-- Section: Keyboard Shortcuts -->
+      <div class="settings-section">
+        <h3 class="settings-section-title">Keyboard Shortcuts</h3>
+        <div class="shortcuts-list">
+          <div class="shortcut-item">
+            <kbd>Ctrl+K</kbd>
+            <span>Command Palette</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl+D</kbd>
+            <span>Toggle Theme</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl+N</kbd>
+            <span>New Task</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Ctrl+F</kbd>
+            <span>Toggle Focus</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Esc</kbd>
+            <span>Close Panel</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== 6. ADD APP MODAL ========== -->
+  <div id="add-app-modal" class="modal-overlay hidden" role="dialog" aria-label="Add quick app">
+    <div class="modal-dialog">
       <div class="modal-header">
         <h3>Add Quick App</h3>
-        <button class="close-modal" id="close-modal"><i class="fas fa-times"></i></button>
+        <button id="close-app-modal" class="modal-close" title="Close" aria-label="Close modal">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-          <label for="app-name">App Name</label>
-          <input type="text" id="app-name" placeholder="e.g. Google">
+        <div class="form-field">
+          <label for="app-name-input">App Name</label>
+          <input id="app-name-input" type="text" placeholder="e.g. Notion" aria-label="App Name">
         </div>
-        <div class="form-group">
-          <label for="app-url">App URL</label>
-          <input type="url" id="app-url" placeholder="e.g. https://google.com">
+        <div class="form-field">
+          <label for="app-url-input">App URL</label>
+          <input id="app-url-input" type="url" placeholder="https://notion.so" aria-label="App URL">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-cancel" id="cancel-app">Cancel</button>
-        <button class="btn-save" id="save-app">Add App</button>
+        <button id="cancel-app-btn" class="btn-ghost" aria-label="Cancel">Cancel</button>
+        <button id="save-app-btn" class="btn-primary" aria-label="Add App">Add App</button>
       </div>
     </div>
   </div>
 
+  <!-- ========== 7. FOCUS OVERLAY ========== -->
+  <div id="focus-overlay" class="focus-overlay hidden" role="dialog" aria-label="Focus mode overlay">
+    <button id="exit-focus" class="exit-focus-btn" aria-label="Exit Focus Mode">
+      <i class="fas fa-times" aria-hidden="true"></i> Exit Focus Mode
+    </button>
+  </div>
+
+  <!-- ========== EXTERNAL SCRIPTS ========== -->
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="src/js/script.js"></script>
+  <script src="src/js/effects.js"></script>
 
 </body>
 

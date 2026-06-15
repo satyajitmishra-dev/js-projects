@@ -107,10 +107,11 @@
 
 ## 🔑 Keyboard Shortcuts
 
-- `Ctrl + K` - Focus search bar
+- `Ctrl + K` - Command Palette
 - `Ctrl + D` - Toggle dark mode
 - `Ctrl + N` - Focus task input
-- `Ctrl + 1-9` - Jump to specific card
+- `Ctrl + F` - Toggle Focus Mode
+- `Escape` - Close panels/modals
 
 ---
 
@@ -119,15 +120,16 @@
 **Built With:**
 - HTML5, CSS3, JavaScript (ES6+)
 - Font Awesome icons
-- Google Fonts (Outfit)
+- Google Fonts (Inter)
 - SortableJS for drag-and-drop
 - Canvas Confetti for celebrations
 
 **APIs Used:**
 - OpenWeatherMap API (Weather data)
-- Quotable API (Daily quotes)
+- DummyJSON Quotes API (Daily quotes)
 - GNews API (Tech news)
 - Google Favicon API (App icons)
+- GitHub Contributions API (Contribution grid)
 
 **Browser Compatibility:**
 - Chrome 88+
@@ -231,8 +233,9 @@ This project is open source and available for personal use.
 - Icons: Font Awesome
 - Fonts: Google Fonts
 - Weather: OpenWeatherMap
-- Quotes: Quotable.io
+- Quotes: DummyJSON
 - News: GNews.io
+- GitHub: GitHub Contributions API
 
 ---
 
